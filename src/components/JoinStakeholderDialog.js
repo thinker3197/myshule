@@ -10,10 +10,10 @@ import TextField from 'material-ui/TextField'
 
 class StakeholderDialog extends Component {
   state = {
-    name: 'Satu Mäkinen',
-    email: 'satu@email.com',
-    facebook: 'https://www.facebook.com/Innov8Tuusula/',
-    comments: "I'd like to organise student social evenings in this space"
+    name: 'Zuena Mgova',
+    email: 'zuenaj27@gmail.com',
+    facebook: 'https://www.facebook.com/zuena.mgova/',
+    comments: "I'd like to teatch kids robotics this week"
   }
 
   handleJoinMentor(pushKey) {
