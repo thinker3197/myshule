@@ -1,11 +1,10 @@
-# Innovate
+# kids resources
 
-- Live on heroku: https://innov8-monio.herokuapp.com/
-
+- Live on heroku: comming soon
 ## Tech
 
 - React + Firebase Real Time Database
 
-## Project Details
+## Description
 
-- Duration of project: 2 days
+-We aim to adapt compuatational thking skills in cumpusoly education. We beileve  a centralized framework will help teachers to get started 
