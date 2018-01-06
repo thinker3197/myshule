@@ -21,12 +21,12 @@ class About extends Component {
     })
   }
 
-  handleOnVote = (pushKey, votes) => {
-    firebase.database().ref('/challenges/' + pushKey + '/votes').set(votes + 1)
-  }
+ //handleOnVote = (pushKey, votes) => {
+   // firebase.database().ref('/challenges/' + pushKey + '/votes').set(votes + 1)
+
 
   handleOnOrganise = (pushKey) => {
-    this.setState({ redirectTo: '/organise/' +  pushKey})
+    this.setState({ redirectTo: '/challenge/' +  pushKey})
   }
 
   getNumberOfRolesTaken = (roles) => {
@@ -69,9 +69,8 @@ class About extends Component {
                         >
                           Organise {this.getNumberOfRolesTaken(Object.values(challenge.roles))} / 7
                         </button>
-                        <button style={styles.button} onClick={() => this.handleOnVote(key, challenge.votes)}>Votes {challenge.votes}</button>
-                        <button style={allRolesTaken ? styles.dButton : styles.button} disabled={allRolesTaken}>Participate</button>
-                        <button style={styles.button}>Mentor</button>
+
+
                       </div>
 
                     </div>

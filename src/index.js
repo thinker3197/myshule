@@ -6,14 +6,15 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 
-export const config = {
-    apiKey: "AIzaSyCNKKWH1DLInT8ybjtflp5v5GGwmag35eg",
-    authDomain: "myshule-368f1.firebaseapp.com",
-    databaseURL: "https://myshule-368f1.firebaseio.com",
-    projectId: "myshule-368f1",
-    storageBucket: "myshule-368f1.appspot.com",
-    messagingSenderId: "937811266582"
+var config = {
+    apiKey: "AIzaSyAcaOAI9WF1UZbs1j50juLCnqx4z8LFhuM",
+    authDomain: "myshule-56c7a.firebaseapp.com",
+    databaseURL: "https://myshule-56c7a.firebaseio.com",
+    projectId: "myshule-56c7a",
+    storageBucket: "myshule-56c7a.appspot.com",
+    messagingSenderId: "523282295991"
 };
+firebase.initializeApp(config);
 
 ReactDOM.render(
   <MuiThemeProvider>
