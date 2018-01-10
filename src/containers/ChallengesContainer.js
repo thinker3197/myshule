@@ -81,8 +81,16 @@ class About extends Component {
                           <button style={allRolesTaken ? styles.button : styles.dButton} onClick={() => this.handleOnOrganise(key)}disabled={!allRolesTaken}>
                             Organise {this.getNumberOfRolesTaken(Object.values(challenge.roles))} / 7
                           </button>
-                          <button onClick={(e) => this.removeChallenge(e, key)}>Remove</button>
-                          <button onClick={(e) => this.editChallenge(e, key)}>Edit</button>
+                          {
+                            firebase.auth().currentUser ? (
+                              <button onClick={(e) => this.removeChallenge(e, key)}>Remove</button>
+                            ) : null
+                          }
+                          {
+                            firebase.auth().currentUser ? (
+                              <button onClick={(e) => this.editChallenge(e, key)}>Edit</button>
+                            ) : null
+                          }
                         </div>
                       </div>
                     </Col>

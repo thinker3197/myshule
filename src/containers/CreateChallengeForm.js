@@ -95,6 +95,14 @@ class CreateChallengeForm extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.props.removeChallengeRefKey();
+
+        this.setState({
+            editMode: false
+        });
+    }
+
     handleCategoryChange = (event, index, value) => this.setState({category: value})
 
     handleTitleChange = (event) => {
