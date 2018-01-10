@@ -17,8 +17,7 @@ const items = [
   <MenuItem key={3} value={'games'} primaryText="Scratch" />,
   <MenuItem key={4} value={'alice'} primaryText="Alice" />,
   <MenuItem key={4} value={'Mindstrom'} primaryText="Lego" />,
-
-]
+];
 
 const roles = {
   role1: {
@@ -56,10 +55,11 @@ const roles = {
     title: 'Location Planning',
     description: ''
   },
-}
+};
 
 class CreateChallengeForm extends Component {
     state = {
+        editMode: false,
         redirect: false,
         loading: false,
         name: 'Zuena Mgova Kowanga',
@@ -67,8 +67,33 @@ class CreateChallengeForm extends Component {
         title: 'CT',
         description: 'Compuatational thinking  has been defended by several authors as a thought process of solving problems compuatationally.' +
         'Many countries partcilaur in Europe and USA have been decrared integrating compuational thking in compusolry education.',
-        category: 'Computational thinking'
+        category: 'Computational thinking',
+        file: null 
     };
+
+    componentWillMount() {
+        if(this.props.challangeRefKey) {
+            firebase.database().ref('/challenges/' + this.props.challangeRefKey).on('value', (snapshot) => {
+                const data = snapshot.val();
+
+                this.setState({
+                    name: data.creator,
+                    email: data.email,
+                    title: data.title,
+                    description: data.description,
+                    category: data.category,
+                });
+            });
+
+            this.setState({
+                editMode: true
+            });
+        } else {
+            this.setState({
+                editMode: false
+            });
+        }
+    }
 
     handleCategoryChange = (event, index, value) => this.setState({category: value})
 
@@ -92,6 +117,43 @@ class CreateChallengeForm extends Component {
         })
     }
 
+    handleFileSubmit = (event) => {
+        const file = event.target.files[0],
+            reader = new FileReader();
+
+        reader.onload = () => {
+            this.setState({
+                file: reader.result
+            });
+        }
+
+        if(file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+    handleOnUpdate() {
+        const updatedChallenge = {
+            creator: this.state.name,
+            email: this.state.email,
+            title: this.state.title,
+            description: this.state.description,
+            category: this.state.category,
+            votes: 0,
+            fileURL: this.state.file,
+            roles: roles
+        }
+
+        firebase.database().ref().child('/challenges/' + this.props.challangeRefKey).update(updatedChallenge);
+
+        this.props.removeChallengeRefKey();
+
+        this.setState({
+            editMode: false,
+            redirect: true
+        });
+    }
+
     handleOnSubmit() {
         this.setState({loading: true})
         console.log('this is state', this.state)
@@ -102,6 +164,7 @@ class CreateChallengeForm extends Component {
             description: this.state.description,
             category: this.state.category,
             votes: 0,
+            fileURL: this.state.file,
             roles: roles
         }
         const pushKey = firebase.database().ref('/challenges').push()
@@ -166,19 +229,24 @@ class CreateChallengeForm extends Component {
                 </SelectField>
                 <br/>
                 <RaisedButton
+                    style={{marginTop: 10, padding: 5}}
+                    containerElement='label'
+                    label='My Label'>
+                    <input style={{marginLeft: 12}} type="file" onChange={this.handleFileSubmit.bind(this)}/>
+                </RaisedButton>
+                <br/>
+                <RaisedButton
                     backgroundColor='#38c098'
                     labelColor='#fff'
                     style={{marginTop: 20}}
                     disabled={this.state.loading}
-                    label="Submit"
-                    onClick={this.handleOnSubmit.bind(this)}
+                    label={this.state.editMode ? "Update" : "Submit"}
+                    onClick={this.state.editMode ? this.handleOnUpdate.bind(this) : this.handleOnSubmit.bind(this)}
                 />
             </Paper>
         </div>
 
     }
-
 }
-
 
 export default CreateChallengeForm

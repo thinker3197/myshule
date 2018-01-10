@@ -12,6 +12,7 @@ const NavBar = ({ title }) => {
         <Link to='/challenges' style={styles.link}>Challenges</Link>
         <Link to='/post-challenge' style={styles.link}>Post Your Challenge</Link>
         <Link to='#' style={styles.link}>Archives</Link>
+        <Link to='/login' style={styles.link}>Login</Link>
         {
           title &&
           <div>
