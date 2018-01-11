@@ -189,7 +189,7 @@ class CreateChallengeForm extends Component {
         }
 
         return <div>
-            <NavBar title='Post your challenge'/>
+            <NavBar title={this.state.editMode ? 'Edit challenge' : 'Post your challenge'}/>
             <Paper style={{width: '50%', marginLeft: 'auto', marginRight: 'auto', padding: 20, marginTop: 50}}>
                 {
                     this.state.loading &&
@@ -239,7 +239,7 @@ class CreateChallengeForm extends Component {
                 <RaisedButton
                     style={{marginTop: 10, padding: 5}}
                     containerElement='label'
-                    label='My Label'>
+                    label='Upload File'>
                     <input style={{marginLeft: 12}} type="file" onChange={this.handleFileSubmit.bind(this)}/>
                 </RaisedButton>
                 <br/>

@@ -5,11 +5,16 @@ import styles from '../styles/ChallengesContainerStyles'
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import { Redirect } from 'react-router-dom';
 
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+
 class About extends Component {
   state = {
     challenges: {},
     redirectTo: null,
-    rolesTaken: ''
+    rolesTaken: '',
+    alertOpen: false,
+    removeChallengeRefKey: null
   }
 
   MAX_WORDS = 200
@@ -27,6 +32,12 @@ class About extends Component {
  //handleOnVote = (pushKey, votes) => {
  // firebase.database().ref('/challenges/' + pushKey + '/votes').set(votes + 1)
 
+  handleClose = () => {
+    this.setState({
+      alertOpen: false,
+      removeChallengeRefKey: null
+    });
+  }
 
   handleOnOrganise = (pushKey) => {
     this.setState({ redirectTo: '/challenge/' +  pushKey})
@@ -42,8 +53,17 @@ class About extends Component {
     return !(numberOfRoles >= 7)
   }
 
+  onRemoveChallenge = (e, key) => {
+    this.setState({
+      alertOpen: true,
+      removeChallengeRefKey: key
+    });
+  }
+
   removeChallenge = (e, key) => {
-    firebase.database().ref('/challenges/' + key).remove();
+    firebase.database().ref('/challenges/' + this.state.removeChallengeRefKey).remove();
+
+    this.handleClose();
   }
 
   editChallenge = (e, key) => {
@@ -55,6 +75,19 @@ class About extends Component {
   }
 
   render() {
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Delete"
+        primary={true}
+        onClick={this.removeChallenge}
+      />,
+    ];
+
     if (this.state.redirectTo) {
       return <Redirect to={this.state.redirectTo}  />
     }
@@ -83,12 +116,12 @@ class About extends Component {
                           </button>
                           {
                             firebase.auth().currentUser ? (
-                              <button onClick={(e) => this.removeChallenge(e, key)}>Remove</button>
+                              <button style={styles.button} onClick={(e) => this.onRemoveChallenge(e, key)}>Remove</button>
                             ) : null
                           }
                           {
                             firebase.auth().currentUser ? (
-                              <button onClick={(e) => this.editChallenge(e, key)}>Edit</button>
+                              <button style={styles.button} onClick={(e) => this.editChallenge(e, key)}>Edit</button>
                             ) : null
                           }
                         </div>
@@ -100,6 +133,14 @@ class About extends Component {
             </Row>
           </Grid>
         </div>
+        <Dialog
+          actions={actions}
+          modal={false}
+          open={this.state.alertOpen}
+          onRequestClose={this.handleClose}
+        >
+          Are you sure you want to delete the challenge?
+        </Dialog>
       </div>
     )
   }
