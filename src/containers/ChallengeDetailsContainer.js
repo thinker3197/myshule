@@ -113,7 +113,7 @@ class ChallengeDetailsContainer extends Component {
                     ?
                       Object.values(challenge.stakeholders).map((stakeholder) => (
                         <div>
-                          <p id={stakeholder.id} style={{ fontFamily: 'Muli', fontSize: 20,color: 'white', textAlign: 'center' }}>
+                          <p id={stakeholder.id} style={{ fontFamily: 'Montserrat', fontSize: 20,color: 'white', textAlign: 'center' }}>
                             <i id={stakeholder.id} style={{ fontSize: 40, color: 'white', paddingRight: 20 }} className="material-icons">account_circle</i>
                             {stakeholder.name}
                             {
@@ -123,11 +123,11 @@ class ChallengeDetailsContainer extends Component {
                               </a>
                             }
                           </p>
-                          <p style={{ fontFamily: 'Muli', fontStyle: 'italic', fontSize: 17, color: 'white', textAlign: 'center'}}>{stakeholder.comments}</p>
+                          <p style={{ fontFamily: 'Montserrat', fontStyle: 'italic', fontSize: 17, color: 'white', textAlign: 'center'}}>{stakeholder.comments}</p>
                         </div>
                       ))
 
-                    : <p style={{ fontFamily: 'Muli', fontSize: 20,color: 'white', textAlign: 'center' }}>None yet :( Join!</p>
+                    : <p style={{ fontFamily: 'Montserrat', fontSize: 20,color: 'white', textAlign: 'center' }}>None yet :( Join!</p>
                 }
                 <div style={{ width: '60%', marginLeft: 'auto', marginRight: 'auto' }}>
                   <button onClick={() => this.handleOpenDialog()} style={styles.stakeholderButton}>Join as a stakeholder</button>
@@ -140,7 +140,7 @@ class ChallengeDetailsContainer extends Component {
                 <div style={{ width: 100, marginLeft:'auto', marginRight: 'auto'}} >
                   <i style={{ textAlign: 'center', fontSize: 100, color: 'rgb(156,208,202)' }} className="material-icons">lightbulb_outline</i>
                 </div>
-                <p style={{ fontSize: 30, fontFamily: 'Muli', letterSpacing: 5, textAlign: 'center', color: 'white'}}>{challenge.category && challenge.category.toUpperCase()}</p>
+                <p style={{ fontSize: 30, fontFamily: 'Montserrat', letterSpacing: 5, textAlign: 'center', color: 'white'}}>{challenge.category && challenge.category.toUpperCase()}</p>
               </div>
             </Col>
             <Col md={4} style={{ backgroundColor: '#38c098', paddingTop: 40, minHeight: 600 }}>
@@ -194,14 +194,14 @@ const styles = {
     fontWeight:'800',
     fontSize: 80,
     marginRight: 50,
-    fontFamily: 'Helvetica',
+    fontFamily: 'Montserrat',
     letterSpacing: 6,
     textAlign: 'right'
   },
   descriptionText: {
     color: 'white',
     fontStyle: 'italic',
-    fontFamily: 'Muli',
+    fontFamily: 'Domine',
     fontWeight: '300',
     width: '50%',
     textAlign: 'center',
@@ -216,11 +216,11 @@ const styles = {
     fontSize: 30,
     letterSpacing: 3,
     fontWeight: '900',
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
     color: '#38c098'
   },
   bottomSubtitle: {
-    fontFamily: 'Muli',
+    fontFamily: 'Domine',
     marginTop: 10,
     fontSize: 14,
     textAlign: 'center',
@@ -232,7 +232,7 @@ const styles = {
     fontSize: 30,
     letterSpacing: 3,
     fontWeight: '900',
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
     color: 'black',
     paddingLeft: 25,
     cursor: 'pointer'
@@ -254,7 +254,7 @@ const styles = {
     paddingTop: 20,
     paddingBottom: 20,
     color: 'white',
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
     border:'1px solid transparent',
     cursor: 'pointer',
     marginTop: 20,
@@ -262,7 +262,7 @@ const styles = {
     marginBottom: 20
   },
   organizers: {
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
     color: 'white',
     fontSize: 18,
     textAlign: 'center',

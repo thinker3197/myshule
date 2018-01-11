@@ -56,7 +56,7 @@ class Home extends Component {
                   <button onClick={() => this.setState({ redirectTo: '/challenges' })} style={Object.assign({}, styles.phaseButton, { color: '#000' })}>Organize</button>
                 </div>
               </Col>
-              <Col md={4} style={{ width: '100%', paddingTop: 100, height: '65vh', backgroundColor: '#f9f907' }}>
+              <Col md={4} style={{ width: '100%', paddingTop: 100, height: '65vh', backgroundColor: 'rgb(242, 242, 242)' }}>
                 <p style={Object.assign({},styles.phaseTitle, { color: 'black'})}>PHASE 3</p>
                 <p style={Object.assign({},styles.phaseSubTitle, { color: 'black'})}>Implement your Solution</p>
                 <div style={styles.phaseButtonContainer}>
@@ -76,7 +76,7 @@ const styles = {
   carouselDiv: {
     width: '100%',
     height: '70vh',
-    backgroundColor: '#38c098',
+    background: 'linear-gradient(rgba(0,234,209,0.3), #01ffb3 90%), url(https://www.varmour.com/templates/varmour/images/easyblog/easyblog_articles/123/b2ap3_large_kids.jpg)',
     paddingTop: '20vh'
   },
   centeredDiv: {
@@ -85,13 +85,13 @@ const styles = {
     marginRight: 'auto',
     paddingTop: 80,
     paddingBottom: 70,
-    backgroundColor: 'white',
+    backgroundColor: 'rgba(256, 256, 256, 0.7)',
     textAlign: 'center',
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat'
   },
   mainHeading: {
     fontSize: 80,
-    fontWeight: '500',
+    fontWeight: '600',
     color: '#43484f',
     margin: 0,
     marginTop: 20
@@ -102,11 +102,12 @@ const styles = {
     margin: 0
   },
   grid: {
-    width: '98vw'
+    width: '100%',
+    overflow: 'hidden'
   },
   leftText: {
     fontSize: 80,
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
     color: 'black',
     margin: 0,
     fontWeight: '700',
@@ -114,7 +115,7 @@ const styles = {
   },
   leftGrid: {
     height: 600,
-    backgroundColor: '#f9f907',
+    backgroundColor: 'rgb(242, 242, 242)',
     paddingTop: 100,
     paddingRight: 100,
     width: '100%',
@@ -129,12 +130,12 @@ const styles = {
     fontSize: 60,
     letterSpacing: 10,
     fontWeight: '900',
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
     textAlign: 'center'
   },
   rightText: {
     color: 'white',
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
     fontSize: 18,
     textAlign: 'center',
     paddingBottom: 10
@@ -160,7 +161,7 @@ const styles = {
     width: 180
   },
   phaseTitle: {
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
     letterSpacing: 8,
     fontSize: 50,
     fontWeight: '600',
@@ -168,7 +169,7 @@ const styles = {
     textAlign: 'center'
   },
   phaseSubTitle: {
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
     fontSize: 25,
     fontWeight: '400',
     color: 'white',
@@ -184,7 +185,7 @@ const styles = {
     paddingTop: 20,
     paddingBottom: 20,
     color: 'white',
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
     border:'1px solid transparent',
     cursor: 'pointer',
     marginTop: 20,

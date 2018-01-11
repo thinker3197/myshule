@@ -53,6 +53,7 @@ class About extends Component {
     return !(numberOfRoles >= 7)
   }
 
+  // Open alert to confirm delete challenge operation
   onRemoveChallenge = (e, key) => {
     this.setState({
       alertOpen: true,
@@ -60,12 +61,19 @@ class About extends Component {
     });
   }
 
-  removeChallenge = (e, key) => {
+  // Remove challenge
+  removeChallenge = () => {
     firebase.database().ref('/challenges/' + this.state.removeChallengeRefKey).remove();
 
     this.handleClose();
   }
 
+  // Pass ref key of challenge to be edited to 
+  // parent conatiner (NavigationContainer) and
+  // re-direct to /post-challange. When in 
+  // post-challenge route, us the ref to get details 
+  // of the challenge and prefil form with info.
+  // Update the changes as done by the user
   editChallenge = (e, key) => {
     this.props.setChallengeRefKey(key);
 
@@ -92,7 +100,7 @@ class About extends Component {
       return <Redirect to={this.state.redirectTo}  />
     }
     return (
-      <div>
+      <div style={{minHeight: '100vh', position: 'relative', 'paddingBottom': '8%'}}>
         <NavBar title='Challenges'/>
         <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
           <Grid style={{ marginTop: 30 }}>
@@ -107,19 +115,25 @@ class About extends Component {
                         <div onClick={() => this.setState({ redirectTo: '/challenge/' + key })}>
                           <p style={styles.challengeTitle}>{challenge.title}</p>
                         </div>
+                        {
+                          // Show description till MAX_WORDS and strip the rest. If description is greater than
+                          // MAX_WORDS, show read-more link
+                        }
                         <p style={styles.description}>{challenge.description.slice(0, this.MAX_WORDS)}
-                          <a href={'/challenge/' + key} style={{dislpay: challenge.description.length > this.MAX_WORDS ? 'inline' : 'none'}}> ...read more</a>
+                          <a href={'/challenge/' + key} style={{dislpay: challenge.description.length > this.MAX_WORDS ? 'inline' : 'none', textDecoration: 'none', color: 'thistle'}}> ...read more</a>
                         </p>
                         <div style={{ textAlign: 'center', marginTop: 40, marginLeft: 'auto', marginRight: 'auto'}}>
                           <button style={allRolesTaken ? styles.button : styles.dButton} onClick={() => this.handleOnOrganise(key)}disabled={!allRolesTaken}>
                             Organise {this.getNumberOfRolesTaken(Object.values(challenge.roles))} / 7
                           </button>
                           {
+                            // If user is autherized show remove challenge option
                             firebase.auth().currentUser ? (
                               <button style={styles.button} onClick={(e) => this.onRemoveChallenge(e, key)}>Remove</button>
                             ) : null
                           }
                           {
+                            // If user is autherized show edit challenge option
                             firebase.auth().currentUser ? (
                               <button style={styles.button} onClick={(e) => this.editChallenge(e, key)}>Edit</button>
                             ) : null

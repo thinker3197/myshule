@@ -28,16 +28,11 @@ const styles = {
   titleContainer: {
     textAlign: 'left'
   },
-  title: {
-    fontSize: 30,
-    fontFamily: 'Muli',
-    fontWeight: '800',
-    color: '#42484f'
-  },
   pageTitle: {
     color: 'white',
     fontSize: 55,
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
+    fontWeight: 700,
     paddingTop: 30,
     paddingBottom: 30
   },
@@ -51,7 +46,8 @@ const styles = {
     color: 'white',
     paddingLeft: 50,
     textAlign: 'center',
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
+    fontWeight: 600,
     textDecoration: 'none',
     fontSize: 18
   }

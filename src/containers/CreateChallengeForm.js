@@ -71,6 +71,9 @@ class CreateChallengeForm extends Component {
         file: null 
     };
 
+    // If challenge ref key was passed as props,
+    // fetch the challenge and pre fill form data.
+    // Set form in edit mode. 
     componentWillMount() {
         if(this.props.challangeRefKey) {
             firebase.database().ref('/challenges/' + this.props.challangeRefKey).on('value', (snapshot) => {
@@ -94,7 +97,10 @@ class CreateChallengeForm extends Component {
             });
         }
     }
-
+    
+    // Remove challenge ref key and exit edit mode 
+    // when user goes to another route ie when 
+    // compoenent unmounts 
     componentWillUnmount() {
         this.props.removeChallengeRefKey();
 
@@ -125,6 +131,8 @@ class CreateChallengeForm extends Component {
         })
     }
 
+    // On file submit, convert file into data URL
+    // for saving file in database
     handleFileSubmit = (event) => {
         const file = event.target.files[0],
             reader = new FileReader();
@@ -140,6 +148,7 @@ class CreateChallengeForm extends Component {
         }
     }
 
+    // Update challenge details (in edit mode)
     handleOnUpdate() {
         const updatedChallenge = {
             creator: this.state.name,
@@ -188,7 +197,7 @@ class CreateChallengeForm extends Component {
             return <Redirect to='/challenges'/>;
         }
 
-        return <div>
+        return <div style={{minHeight: '100vh', position: 'relative', 'paddingBottom': '8%'}}>
             <NavBar title={this.state.editMode ? 'Edit challenge' : 'Post your challenge'}/>
             <Paper style={{width: '50%', marginLeft: 'auto', marginRight: 'auto', padding: 20, marginTop: 50}}>
                 {
@@ -247,6 +256,7 @@ class CreateChallengeForm extends Component {
                     backgroundColor='#38c098'
                     labelColor='#fff'
                     style={{marginTop: 20}}
+                    buttonStyle={{background: 'linear-gradient(45deg, #00ead1 30%, #01ffb3 90%)'}}
                     disabled={this.state.loading}
                     label={this.state.editMode ? "Update" : "Submit"}
                     onClick={this.state.editMode ? this.handleOnUpdate.bind(this) : this.handleOnSubmit.bind(this)}

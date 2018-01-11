@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom'
 import * as firebase from 'firebase'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import App from './App'
+import App from './App';
+import './styles/styles.css';
 import registerServiceWorker from './registerServiceWorker'
 
 var config = {

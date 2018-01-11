@@ -39,6 +39,8 @@ class LoginContainer extends Component {
     });
   }
 
+  // If user account doesn't exist, set button
+  // action to Sign Up
   activateSignUp = () => {
     setTimeout(() => {
       this.setState({
@@ -48,6 +50,8 @@ class LoginContainer extends Component {
     }, 1500);
   }
 
+  // On sign-up, create new user account
+  // and redirect to home page
   onUserSignUp = () => {
     const _self = this;
 
@@ -70,6 +74,8 @@ class LoginContainer extends Component {
     });
   }
 
+  // On sign-out, sign out current user account
+  // and redirect to home page
   onUserSignOut = () => {
     const _self = this;
 
@@ -105,7 +111,10 @@ class LoginContainer extends Component {
         break;
     }
   }
-
+  
+  // Try to log in with entered username and
+  // passowrd. If login fails and account doesn't
+  // exist, switch to sign up mode
   onUserLogin = () => {
     const _self = this;
 
@@ -140,8 +149,9 @@ class LoginContainer extends Component {
       return <Redirect to={this.state.redirectTo}  />
     }
 
+    // If no user is logged in, show login form
     if(!user) {
-      return <div>
+      return <div style={{minHeight: '100vh', position: 'relative', 'paddingBottom': '8%'}}>
         <NavBar title={this.state.action === 'Login' ? 'Login' : 'Sign Up'}/>
         <Paper style={{width: '40%', marginLeft: 'auto', marginRight: 'auto', padding: 20, marginTop: 50}}>
           <TextField
@@ -165,14 +175,17 @@ class LoginContainer extends Component {
             backgroundColor='#38c098'
             labelColor='#fff'
             style={{marginTop: 20}}
+            buttonStyle={{background: 'linear-gradient(45deg, #00ead1 30%, #01ffb3 90%)'}}
             disabled={this.state.loading}
             label={this.state.action}
             onClick={this.state.action === 'Login' ? this.onUserLogin : this.onUserSignUp}
           />
         </Paper>
       </div>
-    } else {
-      return <div>
+    } 
+    // If user is logged in, show user login info
+    else {
+      return <div style={{minHeight: '100vh', position: 'relative', 'paddingBottom': '8%'}}>
         <NavBar title='Login'/>
         <Paper style={{width: '40%', marginLeft: 'auto', marginRight: 'auto', padding: 20, marginTop: 50}}>
           <List>
@@ -188,6 +201,7 @@ class LoginContainer extends Component {
             backgroundColor='#38c098'
             labelColor='#fff'
             style={{marginTop: 20}}
+            buttonStyle={{background: 'linear-gradient(45deg, #00ead1 30%, #01ffb3 90%)'}}
             disabled={this.state.loading}
             label='Sign Out'
             onClick={this.onUserSignOut}

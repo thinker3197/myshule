@@ -7,6 +7,7 @@ import ChallengeDetails from './ChallengeDetailsContainer'
 import OrganiseContainer from './OrganiseContainer'
 import LocationBookingContainer from './LocationBookingContainer'
 import LoginContainer from './LoginContainer';
+import Footer from '../components/Footer';
 
 const renderMergedProps = (component, ...rest) => {
   const finalProps = Object.assign({}, ...rest);
@@ -15,6 +16,8 @@ const renderMergedProps = (component, ...rest) => {
   );
 }
 
+// Custom compoent that merges props on component passed in
+// Route component's component prop
 const PropsRoute = ({ component, ...rest }) => {
   return (
     <Route {...rest} render={routeProps => {
@@ -43,7 +46,7 @@ class Navigator extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div style={{margin: '1%'}}>
           <Route exact path="/" component={Home}/>
           <PropsRoute path='/post-challenge' component={CreateChallengeForm} challangeRefKey={this.state.key} removeChallengeRefKey={this.removeRefKey}/>
           <PropsRoute path='/challenges' component={Challenges} setChallengeRefKey={this.setRefKey} />
@@ -51,6 +54,7 @@ class Navigator extends Component {
           <Route exact path="/organise/:id" component={OrganiseContainer} />
           <Route exact path="/organise/:id/location" component={LocationBookingContainer} />
           <Route exact path="/login" component={LoginContainer} />
+          <Footer />
         </div>
       </Router>
     )

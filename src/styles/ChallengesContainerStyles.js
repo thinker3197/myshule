@@ -1,7 +1,7 @@
 const styles = {
   description: {
     color: '#42484f',
-    fontFamily: 'Muli',
+    fontFamily: 'Domine',
     textAlign: 'center',
     fontSize: 16,
     lineHeight: 1.5
@@ -15,7 +15,7 @@ const styles = {
     borderRadius: 28,
     textDecoration: 'none',
     border:'1px solid transparent',
-    backgroundColor: '#38c098',
+    background: 'linear-gradient(45deg, #00ead1 30%, #01ffb3 90%)',
     color: 'white',
     fontFamily: 'Muli',
     cursor: 'pointer',
@@ -38,7 +38,8 @@ const styles = {
   },
   challengeTitle: {
     cursor: 'pointer',
-    fontFamily: 'Muli',
+    fontFamily: 'Montserrat',
+    fontWeight: 600,
     textAlign: 'center',
     fontSize: 25,
     color: '#38c098'
