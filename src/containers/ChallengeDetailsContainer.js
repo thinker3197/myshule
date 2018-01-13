@@ -29,13 +29,16 @@ class ChallengeDetailsContainer extends Component {
     show: null,
     openDialog: false,
     redirectTo: null,
-    tab: 'organizers'
+    tab: 'organizers',
+    loading: false
   }
 
   componentWillMount() {
     firebase.database().ref('/challenges/' + this.props.match.params.id).on('value', (snapshot) => {
       const challenge = snapshot.val()
       this.setState({ challenge })
+
+      console.log(challenge)
     })
   }
 
@@ -61,6 +64,23 @@ class ChallengeDetailsContainer extends Component {
   areAllRolesTaken = (roles) => {
     const numberOfRoles = this.getNumberOfRolesTaken(roles)
     return !(numberOfRoles >= 7)
+  }
+
+  onDownloadClick = () => {
+    this.setState({loading: true});
+
+    firebase.storage().ref().child('/challenges/' + this.state.challenge.file).getDownloadURL()
+    .then((url) => {
+      this.setState({loading: false});
+
+      var a = document.createElement('a');
+      a.download = this.state.challenge.file;
+      a.style.display = 'none';
+      a.href = url;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
   }
 
   render() {
@@ -98,6 +118,7 @@ class ChallengeDetailsContainer extends Component {
                     </button>
                     <button style={allRolesTaken ? bStyles.dButton : bStyles.button} disabled={allRolesTaken}>Participate</button>
                     <button style={bStyles.button}>Mentor</button>
+                    <button style={!this.state.challenge.file || this.state.loading ? bStyles.dButton : bStyles.button} onClick={this.onDownloadClick}>Download</button>
                   </div>
                 </div>
             </Col>

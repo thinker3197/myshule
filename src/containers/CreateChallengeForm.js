@@ -134,19 +134,19 @@ class CreateChallengeForm extends Component {
     // On file submit, convert file into data URL
     // for saving file in database
     handleFileSubmit = (event) => {
-        const file = event.target.files[0],
-            reader = new FileReader();
-
-        reader.onload = () => {
-            this.setState({
-                file: reader.result
-            });
-        }
-
-        if(file) {
-            reader.readAsDataURL(file);
-        }
+        const file = event.target.files[0];
+        
+        this.setState({
+            file: file
+        });
     }
+
+    uploadFile = (fileName) => {
+        firebase.storage().ref().child('/challenges/' + fileName).put(this.state.file)
+        .then((snapshot) => {
+            console.log('File successfully downloaded!');
+        });
+    } 
 
     // Update challenge details (in edit mode)
     handleOnUpdate() {
@@ -157,17 +157,22 @@ class CreateChallengeForm extends Component {
             description: this.state.description,
             category: this.state.category,
             votes: 0,
-            fileURL: this.state.file,
+            file: (+new Date()) + '-' + this.state.file.name,
             roles: roles
         }
 
         firebase.database().ref().child('/challenges/' + this.props.challangeRefKey).update(updatedChallenge);
 
+        if(this.state.file) {
+            this.uploadFile(updatedChallenge.file);
+        }
+
         this.props.removeChallengeRefKey();
 
         this.setState({
             editMode: false,
-            redirect: true
+            redirect: true,
+            loading: false
         });
     }
 
@@ -181,13 +186,17 @@ class CreateChallengeForm extends Component {
             description: this.state.description,
             category: this.state.category,
             votes: 0,
-            fileURL: this.state.file,
+            file: (+new Date()) + '-' + this.state.file.name,
             roles: roles
         }
         const pushKey = firebase.database().ref('/challenges').push()
         pushKey.set(newChallenge).then(() => {
             this.setState({loading: false, redirect: true})
         })
+
+        if(this.state.file) {
+            this.uploadFile(newChallenge.file);
+        }
     }
 
     render() {
