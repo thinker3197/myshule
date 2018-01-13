@@ -42,12 +42,17 @@ class LoginContainer extends Component {
   // If user account doesn't exist, set button
   // action to Sign Up
   activateSignUp = () => {
-    setTimeout(() => {
-      this.setState({
-        action: 'Sign Up',
-        errorText: ''
-      });
-    }, 1500);
+    this.setState({
+      action: 'Sign Up',
+      errorText: ''
+    });
+  }
+
+  activateLogin = () => {
+    this.setState({
+      action: 'Login',
+      errorText: ''
+    });
   }
 
   // On sign-up, create new user account
@@ -134,11 +139,6 @@ class LoginContainer extends Component {
       
       _self.stopLoading();
       _self.handleError(errorCode, errorMessage);
-
-      if(errorCode === 'auth/user-not-found') {
-
-        _self.activateSignUp();
-      }
     });
   }
 
@@ -180,6 +180,11 @@ class LoginContainer extends Component {
             label={this.state.action}
             onClick={this.state.action === 'Login' ? this.onUserLogin : this.onUserSignUp}
           />
+            {
+              this.state.action === 'Login' ? 
+                (<a style={{float: 'right', marginTop: '7%', fontSize: '14px', color: 'darkgray'}} onClick={this.activateSignUp}>Don't have a account? <strong style={{cursor: 'pointer'}}>Sign Up</strong> instead</a>) 
+                : (<a style={{float: 'right', marginTop: '7%', fontSize: '14px', color: 'darkgray'}} onClick={this.activateLogin}>Already have an account? <strong style={{cursor: 'pointer'}}>Login</strong> instead</a>)
+            }
         </Paper>
       </div>
     } 
