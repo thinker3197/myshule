@@ -150,6 +150,7 @@ class CreateChallengeForm extends Component {
 
     // Update challenge details (in edit mode)
     handleOnUpdate() {
+        const fileName = this.state.file ? (+new Date()) + '-' + this.state.file.name : null;
         const updatedChallenge = {
             creator: this.state.name,
             email: this.state.email,
@@ -157,7 +158,7 @@ class CreateChallengeForm extends Component {
             description: this.state.description,
             category: this.state.category,
             votes: 0,
-            file: (+new Date()) + '-' + this.state.file.name,
+            file: fileName,
             roles: roles
         }
 
@@ -177,8 +178,9 @@ class CreateChallengeForm extends Component {
     }
 
     handleOnSubmit() {
-        this.setState({loading: true})
-        console.log('this is state', this.state)
+        this.setState({loading: true});
+
+        const fileName = this.state.file ? (+new Date()) + '-' + this.state.file.name : null;
         const newChallenge = {
             creator: this.state.name,
             email: this.state.email,
@@ -186,7 +188,7 @@ class CreateChallengeForm extends Component {
             description: this.state.description,
             category: this.state.category,
             votes: 0,
-            file: (+new Date()) + '-' + this.state.file.name,
+            file: fileName,
             roles: roles
         }
         const pushKey = firebase.database().ref('/challenges').push()
